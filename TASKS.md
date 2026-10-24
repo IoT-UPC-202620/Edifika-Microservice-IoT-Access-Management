@@ -27,12 +27,12 @@
 - Métricas: —
 - Bloqueos / notas: —
 
-## Task 4 — Credenciales RFID   [ ] pendiente
+## Task 4 — Credenciales RFID   [x] hecha
 - Rama: feature/H2-credentials
-- Paso actual: pendiente
-- Archivos tocados: —
-- Tests: —
-- Último commit: —
+- Paso actual: Completado
+- Archivos tocados: AccessCredential.java, RfidUid.java, CredentialStatus.java, SuspensionReason.java, CredentialOrigin.java, CreateCredentialCommand.java, ChangeCredentialStatusCommand.java, UpsertEdgeCredentialCommand.java, GetCredentialsQuery.java, GetCredentialsByUserQuery.java, GetCredentialByIdQuery.java, CredentialCreatedEvent.java, DuplicateRfidUidException.java, CredentialNotFoundException.java, AccessCredentialRepository.java, CredentialCommandService.java, CredentialQueryService.java, CredentialCommandServiceImpl.java, CredentialQueryServiceImpl.java, CreateCredentialResource.java, ChangeCredentialStatusResource.java, CredentialResource.java, CreateCredentialCommandFromResourceAssembler.java, CredentialResourceFromEntityAssembler.java, AccessCredentialController.java, RfidUidTest.java, AccessCredentialTest.java, CredentialCommandServiceImplTest.java, AccessCredentialControllerIT.java
+- Tests: `mvnw.cmd -B verify` → 46/46 tests OK (33 unit tests, 13 ITs across AccessCredentialControllerIT, IotDeviceControllerIT, RabbitMqConfigurationIT, ProcessedEventGuardIT, ApplicationContextIT)
+- Último commit: feat(credentials): RFID credentials with debt suspension and edge upsert (H2)
 - Métricas: —
 - Bloqueos / notas: —
 
