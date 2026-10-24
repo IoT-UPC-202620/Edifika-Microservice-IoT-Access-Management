@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceWentOffline Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceCode": {
+      "type": "string"
+    },
+    "lastSeenAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "required": [
+    "deviceCode",
+    "lastSeenAt"
+  ],
+  "additionalProperties": true
+}

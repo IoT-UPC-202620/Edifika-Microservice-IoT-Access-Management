@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReadingSeriesResource",
+  "type": "object",
+  "properties": {
+    "deviceCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "magnitude": {
+      "type": "string",
+      "enum": [
+        "TEMPERATURE",
+        "HUMIDITY"
+      ]
+    },
+    "unit": {
+      "type": "string"
+    },
+    "bucket": {
+      "type": "string",
+      "enum": [
+        "raw",
+        "1m",
+        "1h"
+      ]
+    },
+    "from": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "to": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "t": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "t",
+          "value",
+          "min",
+          "max",
+          "count"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "deviceCode",
+    "magnitude",
+    "unit",
+    "bucket",
+    "from",
+    "to",
+    "points"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateDeviceRequest",
+  "type": "object",
+  "properties": {
+    "deviceCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "gatewayId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "deviceType": {
+      "type": "string",
+      "enum": [
+        "DOOR"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "RFID",
+          "LOCK",
+          "BUZZER",
+          "OLED",
+          "RGB_LED",
+          "TEMPERATURE",
+          "HUMIDITY"
+        ]
+      }
+    },
+    "unlockSeconds": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "deviceCode",
+    "gatewayId",
+    "name",
+    "location",
+    "deviceType",
+    "capabilities",
+    "unlockSeconds"
+  ],
+  "additionalProperties": false
+}

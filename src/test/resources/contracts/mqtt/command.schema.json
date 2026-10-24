@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MQTT Gateway-to-Node Command Message",
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "enum": [
+        1,
+        "1"
+      ]
+    },
+    "commandId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "access_result",
+        "mode",
+        "rgb",
+        "unlock",
+        "display",
+        "buzzer",
+        "alert",
+        "maintenance",
+        "time_sync"
+      ]
+    },
+    "params": {
+      "type": "object"
+    },
+    "ts": {
+      "type": [
+        "integer",
+        "number",
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "v",
+    "commandId",
+    "type",
+    "params",
+    "ts"
+  ],
+  "additionalProperties": true
+}

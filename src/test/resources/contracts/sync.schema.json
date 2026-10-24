@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cache Sync Snapshot",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "full": {
+      "type": "boolean"
+    },
+    "credentials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "pattern": "^[0-9A-F]{8,20}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RFID"
+            ]
+          },
+          "residentId": {
+            "type": "string"
+          },
+          "residentName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED",
+              "REVOKED"
+            ]
+          },
+          "validFrom": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "validUntil": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "uid",
+          "type",
+          "residentId",
+          "residentName",
+          "status",
+          "validFrom",
+          "validUntil"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "deviceCode": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]{3,64}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "RFID",
+                "LOCK",
+                "BUZZER",
+                "OLED",
+                "RGB_LED",
+                "TEMPERATURE",
+                "HUMIDITY"
+              ]
+            }
+          },
+          "ledColor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^#[0-9A-Fa-f]{6}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PROVISIONED",
+              "ACTIVE",
+              "MAINTENANCE",
+              "OFFLINE"
+            ]
+          },
+          "settings": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "deviceCode",
+          "name",
+          "location",
+          "capabilities",
+          "status",
+          "settings"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "removedDeviceCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reservations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "deviceCode": {
+            "type": "string"
+          },
+          "holderResidentId": {
+            "type": "string"
+          },
+          "startsAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "endsAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "authorizedResidentIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "deviceCode",
+          "holderResidentId",
+          "startsAt",
+          "endsAt",
+          "authorizedResidentIds"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "removedReservationIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "permissions": {
+      "type": "array"
+    },
+    "areaSchedules": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "version",
+    "full",
+    "credentials",
+    "devices",
+    "removedDeviceCodes",
+    "reservations",
+    "removedReservationIds",
+    "permissions",
+    "areaSchedules"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PhysicalAccessDenied Event Payload",
+  "type": "object",
+  "properties": {
+    "attemptId": {
+      "type": "integer"
+    },
+    "deviceId": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string"
+    },
+    "userId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "rfidUidMasked": {
+      "type": "string",
+      "pattern": "^\\*{4}[0-9A-F]{4}$"
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "GRANTED",
+        "NOT_REGISTERED",
+        "SUSPENDED",
+        "DELINQUENT",
+        "REVOKED",
+        "EXPIRED",
+        "NOT_AUTHORIZED",
+        "MAINTENANCE",
+        "OUT_OF_SCHEDULE",
+        "UNSUPPORTED"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "required": [
+    "attemptId",
+    "deviceId",
+    "deviceCode",
+    "userId",
+    "rfidUidMasked",
+    "accessMode",
+    "reason",
+    "occurredAt"
+  ],
+  "additionalProperties": true
+}

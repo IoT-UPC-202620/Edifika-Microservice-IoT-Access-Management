@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccessAttempt Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "areaId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "credential": {
+      "type": "string"
+    },
+    "credentialType": {
+      "type": "string",
+      "enum": [
+        "RFID"
+      ]
+    },
+    "residentId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "GRANTED",
+        "DENIED"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "unknown_credential",
+        "credential_suspended",
+        "credential_revoked",
+        "credential_expired",
+        "outside_schedule",
+        "no_permission",
+        "not_authorized",
+        "maintenance",
+        "unsupported_credential_type"
+      ]
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    }
+  },
+  "required": [
+    "deviceId",
+    "areaId",
+    "credential",
+    "credentialType",
+    "residentId",
+    "result",
+    "reason",
+    "accessMode"
+  ],
+  "additionalProperties": true
+}

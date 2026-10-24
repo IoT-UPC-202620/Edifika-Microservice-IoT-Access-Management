@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceStatus Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "event": {
+      "type": "string",
+      "enum": [
+        "registered",
+        "settings_updated",
+        "maintenance_started",
+        "maintenance_ended",
+        "online",
+        "offline",
+        "firmware",
+        "mode_changed"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "areaId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "settings": {
+      "type": "object"
+    },
+    "by": {
+      "type": "string"
+    },
+    "until": {
+      "type": "string"
+    },
+    "durationSeconds": {
+      "type": "integer"
+    },
+    "lastSeen": {
+      "type": "string"
+    },
+    "firmware": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "deviceId",
+    "event"
+  ],
+  "additionalProperties": true
+}

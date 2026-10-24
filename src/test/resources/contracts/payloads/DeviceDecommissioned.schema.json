@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceDecommissioned Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "deviceId",
+    "deviceCode"
+  ],
+  "additionalProperties": true
+}

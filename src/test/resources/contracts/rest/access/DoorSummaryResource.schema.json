@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DoorSummaryResource",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PROVISIONED",
+        "ACTIVE",
+        "MAINTENANCE",
+        "OFFLINE",
+        "DECOMMISSIONED"
+      ]
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    },
+    "currentReservation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "startsAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endsAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mine": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "startsAt",
+        "endsAt",
+        "mine"
+      ],
+      "additionalProperties": false
+    },
+    "ledColor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "canEnter": {
+      "type": "boolean"
+    },
+    "canReserve": {
+      "type": "boolean"
+    },
+    "canChangeLed": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "deviceId",
+    "deviceCode",
+    "name",
+    "location",
+    "buildingId",
+    "status",
+    "accessMode",
+    "currentReservation",
+    "ledColor",
+    "canEnter",
+    "canReserve",
+    "canChangeLed"
+  ],
+  "additionalProperties": false
+}

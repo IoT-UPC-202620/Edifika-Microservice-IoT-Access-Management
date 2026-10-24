@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PhysicalAccessGranted Event Payload",
+  "type": "object",
+  "properties": {
+    "attemptId": {
+      "type": "integer"
+    },
+    "deviceId": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string"
+    },
+    "userId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "credentialId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "required": [
+    "attemptId",
+    "deviceId",
+    "deviceCode",
+    "userId",
+    "credentialId",
+    "accessMode",
+    "occurredAt"
+  ],
+  "additionalProperties": true
+}

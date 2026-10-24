@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MQTT Access Message",
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "enum": [
+        1,
+        "1"
+      ]
+    },
+    "ts": {
+      "type": [
+        "integer",
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "credentialType": {
+      "type": "string",
+      "enum": [
+        "RFID"
+      ]
+    },
+    "credential": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{8,20}$"
+    }
+  },
+  "required": [
+    "v",
+    "ts",
+    "credentialType",
+    "credential"
+  ],
+  "additionalProperties": true
+}

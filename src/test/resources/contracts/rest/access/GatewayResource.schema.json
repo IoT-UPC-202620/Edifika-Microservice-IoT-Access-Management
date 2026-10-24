@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GatewayResource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "gatewayCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ONLINE",
+        "OFFLINE",
+        "PROVISIONED",
+        "DECOMMISSIONED"
+      ]
+    },
+    "syncVersion": {
+      "type": "integer"
+    },
+    "lastSyncAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "gatewayCode",
+    "buildingId",
+    "name",
+    "status",
+    "syncVersion",
+    "lastSyncAt",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}
