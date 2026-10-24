@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceTelemetryResource",
+  "type": "object",
+  "properties": {
+    "deviceCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "deviceId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "connectionStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "OFFLINE"
+      ]
+    },
+    "lastHeartbeatAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "latest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "magnitude": {
+            "type": "string",
+            "enum": [
+              "TEMPERATURE",
+              "HUMIDITY",
+              "ULTRASONIC"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": "string"
+          },
+          "capturedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "magnitude",
+          "value",
+          "unit",
+          "capturedAt"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "deviceCode",
+    "deviceId",
+    "name",
+    "buildingId",
+    "connectionStatus",
+    "lastHeartbeatAt",
+    "latest"
+  ],
+  "additionalProperties": false
+}

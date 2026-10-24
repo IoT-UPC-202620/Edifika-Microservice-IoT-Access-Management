@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateGatewayRequest",
+  "type": "object",
+  "properties": {
+    "gatewayCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "gatewayCode",
+    "buildingId",
+    "name"
+  ],
+  "additionalProperties": false
+}

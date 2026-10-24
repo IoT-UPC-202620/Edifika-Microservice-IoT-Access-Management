@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MQTT Ack Message",
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "enum": [
+        1,
+        "1"
+      ]
+    },
+    "ts": {
+      "type": [
+        "integer",
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "commandId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OK",
+        "FAILED",
+        "ERROR"
+      ]
+    },
+    "detail": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "v",
+    "ts",
+    "commandId",
+    "status",
+    "detail"
+  ],
+  "additionalProperties": true
+}

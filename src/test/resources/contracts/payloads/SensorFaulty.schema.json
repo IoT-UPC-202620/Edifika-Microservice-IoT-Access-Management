@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SensorFaulty Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceCode": {
+      "type": "string"
+    },
+    "sensor": {
+      "type": "string",
+      "enum": [
+        "temperature",
+        "humidity",
+        "ultrasonic"
+      ]
+    },
+    "consecutiveInvalid": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "deviceCode",
+    "sensor"
+  ],
+  "additionalProperties": true
+}

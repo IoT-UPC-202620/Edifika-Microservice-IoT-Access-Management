@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceResource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "gatewayId": {
+      "type": "integer"
+    },
+    "gatewayCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "deviceType": {
+      "type": "string",
+      "enum": [
+        "DOOR"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "RFID",
+          "LOCK",
+          "BUZZER",
+          "OLED",
+          "RGB_LED",
+          "TEMPERATURE",
+          "HUMIDITY"
+        ]
+      }
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    },
+    "activeReservationId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ledColor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "unlockSeconds": {
+      "type": "integer"
+    },
+    "firmwareVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PROVISIONED",
+        "ACTIVE",
+        "MAINTENANCE",
+        "OFFLINE",
+        "DECOMMISSIONED"
+      ]
+    },
+    "lastSeenAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "deviceCode",
+    "gatewayId",
+    "gatewayCode",
+    "buildingId",
+    "name",
+    "location",
+    "deviceType",
+    "capabilities",
+    "accessMode",
+    "activeReservationId",
+    "ledColor",
+    "unlockSeconds",
+    "firmwareVersion",
+    "status",
+    "lastSeenAt",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SyncRequested Command Payload",
+  "type": "object",
+  "properties": {
+    "syncVersion": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "syncVersion"
+  ],
+  "additionalProperties": true
+}
