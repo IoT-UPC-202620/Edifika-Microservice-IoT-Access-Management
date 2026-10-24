@@ -18,12 +18,12 @@
 - Métricas: —
 - Bloqueos / notas: —
 
-## Task 3 — Gateways y dispositivos   [ ] pendiente
+## Task 3 — Gateways y dispositivos   [x] hecha
 - Rama: feature/H2-devices
-- Paso actual: pendiente
-- Archivos tocados: —
-- Tests: —
-- Último commit: —
+- Paso actual: Completado
+- Archivos tocados: EdgeGateway.java, IotDevice.java, DeviceCode.java, RgbColor.java, GatewayStatus.java, DeviceStatus.java, DeviceType.java, DeviceCapability.java, AccessMode.java, CreateGatewayCommand.java, RotateGatewayApiKeyCommand.java, CreateDeviceCommand.java, UpdateDeviceCommand.java, SetDeviceMaintenanceCommand.java, DecommissionDeviceCommand.java, GetAllGatewaysQuery.java, GetGatewayByIdQuery.java, GetDevicesQuery.java, GetDeviceByIdQuery.java, DeviceRegisteredEvent.java, DeviceUpdatedEvent.java, DeviceDecommissionedEvent.java, GatewayNotFoundException.java, DeviceNotFoundException.java, DuplicateGatewayCodeException.java, DuplicateDeviceCodeException.java, EdgeGatewayRepository.java, IotDeviceRepository.java, GatewayCommandService.java, GatewayQueryService.java, DeviceCommandService.java, DeviceQueryService.java, GatewayCommandServiceImpl.java, GatewayQueryServiceImpl.java, DeviceCommandServiceImpl.java, DeviceQueryServiceImpl.java, EdgeSyncNotifier.java, NoOpEdgeSyncNotifier.java, DeviceRegistryIntegrationEventHandler.java, EdgeGatewayController.java, IotDeviceController.java, resources/**, transform/**, DeviceCodeTest.java, RgbColorTest.java, EdgeGatewayTest.java, IotDeviceTest.java, GatewayCommandServiceImplTest.java, DeviceCommandServiceImplTest.java, IotDeviceControllerIT.java
+- Tests: `mvnw.cmd -B verify` → 10/10 tests OK (6 unit suites, 4 IT suites: IotDeviceControllerIT, RabbitMqConfigurationIT, ProcessedEventGuardIT, ApplicationContextIT)
+- Último commit: feat(devices): gateway and ESP32 device registry with API keys and registry events (H2)
 - Métricas: —
 - Bloqueos / notas: —
 
