@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reading Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "areaId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sensor": {
+      "type": "string",
+      "enum": [
+        "temperature",
+        "humidity",
+        "ultrasonic"
+      ]
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "°C",
+        "C",
+        "%",
+        "cm"
+      ]
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "timeSuspect": {
+      "type": "boolean"
+    },
+    "levelPct": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "deviceId",
+    "areaId",
+    "sensor",
+    "value",
+    "unit",
+    "capturedAt",
+    "timeSuspect"
+  ],
+  "additionalProperties": true
+}

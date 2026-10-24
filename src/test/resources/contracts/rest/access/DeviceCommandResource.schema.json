@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceCommandResource",
+  "type": "object",
+  "properties": {
+    "commandId": {
+      "type": "string"
+    },
+    "deviceId": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "string"
+    },
+    "params": {
+      "type": "object"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "OK",
+        "FAILED",
+        "EXPIRED"
+      ]
+    },
+    "detail": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "requestedBy": {
+      "type": "integer"
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolvedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "commandId",
+    "deviceId",
+    "type",
+    "params",
+    "status",
+    "detail",
+    "requestedBy",
+    "requestedAt",
+    "expiresAt",
+    "resolvedAt"
+  ],
+  "additionalProperties": false
+}

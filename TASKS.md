@@ -5,16 +5,16 @@
 - Paso actual: Completado
 - Archivos tocados: pom.xml, Dockerfile, .env.example, .gitignore, README.md, application.properties, EdifikaMicroserviceIoTAccessManagementApplication.java, shared/**, infrastructure/authorization/sfs/**, GlobalExceptionHandler.java, ErrorResource.java, IotDeviceController.java, ExternalServiceUnavailableException.java, TestcontainersConfiguration.java, JwtTestTokens.java, ContractAssertions.java, ApplicationContextIT.java
 - Tests: `mvnw.cmd -B verify` → 2/2 tests OK (ApplicationContextIT)
-- Último commit: pendiente
+- Último commit: 68f7777 chore: scaffold IoT Access Management from Payment template (H2)
 - Métricas: —
 - Bloqueos / notas: —
 
-## Task 2 — Infraestructura de mensajería (topología, sobre, publicadores e idempotencia)   [ ] pendiente
+## Task 2 — Infraestructura de mensajería (topología, sobre, publicadores e idempotencia)   [x] hecha
 - Rama: feature/H2-messaging
-- Paso actual: pendiente
-- Archivos tocados: —
-- Tests: —
-- Último commit: —
+- Paso actual: Completado
+- Archivos tocados: pom.xml, IntegrationEnvelope.java, RabbitMqConfiguration.java, IntegrationEventPublisher.java, EdgeCommandPublisher.java, RabbitIntegrationEventPublisher.java, RabbitEdgeCommandPublisher.java, ProcessedEvent.java, ProcessedEventRepository.java, ProcessedEventGuard.java, RabbitMqConfigurationIT.java, ProcessedEventGuardIT.java, contracts/**
+- Tests: `mvnw.cmd -B verify` → 5/5 tests OK (RabbitMqConfigurationIT, ProcessedEventGuardIT, ApplicationContextIT)
+- Último commit: feat(messaging): RabbitMQ topology, integration envelope publishers and idempotency guard (H2)
 - Métricas: —
 - Bloqueos / notas: —
 

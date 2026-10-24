@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResidentStatusResource",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "integer"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "unitIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "delinquent": {
+      "type": "boolean"
+    },
+    "overdueDebtCount": {
+      "type": "integer"
+    },
+    "checkedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastError": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "userId",
+    "buildingId",
+    "unitIds",
+    "delinquent",
+    "overdueDebtCount",
+    "checkedAt",
+    "lastError"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AuthorizationResource",
+  "type": "object",
+  "properties": {
+    "reservationId": {
+      "type": "integer"
+    },
+    "userId": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "REVOKED"
+      ]
+    },
+    "grantedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "reservationId",
+    "userId",
+    "status",
+    "grantedAt"
+  ],
+  "additionalProperties": false
+}

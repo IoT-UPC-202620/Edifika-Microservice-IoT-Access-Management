@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DoorReservationResource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "deviceId": {
+      "type": "integer"
+    },
+    "holderUserId": {
+      "type": "integer"
+    },
+    "startsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SCHEDULED",
+        "ACTIVE",
+        "ENDED",
+        "CANCELLED"
+      ]
+    },
+    "authorizedUserIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "createdBy": {
+      "type": "integer"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "deviceId",
+    "holderUserId",
+    "startsAt",
+    "endsAt",
+    "status",
+    "authorizedUserIds",
+    "createdBy",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

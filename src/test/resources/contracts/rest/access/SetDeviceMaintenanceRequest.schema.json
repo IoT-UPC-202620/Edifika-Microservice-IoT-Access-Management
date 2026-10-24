@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SetDeviceMaintenanceRequest",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "enabled"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceUpdated Event Payload",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string"
+    },
+    "gatewayCode": {
+      "type": "string"
+    },
+    "buildingId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "deviceType": {
+      "type": "string",
+      "enum": [
+        "DOOR"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "RFID",
+          "LOCK",
+          "BUZZER",
+          "OLED",
+          "RGB_LED",
+          "TEMPERATURE",
+          "HUMIDITY"
+        ]
+      }
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PROVISIONED",
+        "ACTIVE",
+        "MAINTENANCE",
+        "OFFLINE",
+        "DECOMMISSIONED"
+      ]
+    }
+  },
+  "required": [
+    "deviceId",
+    "deviceCode",
+    "gatewayCode",
+    "buildingId",
+    "name",
+    "deviceType",
+    "capabilities",
+    "accessMode",
+    "status"
+  ],
+  "additionalProperties": true
+}

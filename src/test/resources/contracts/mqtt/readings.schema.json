@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MQTT Readings Message",
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "enum": [
+        1,
+        "1"
+      ]
+    },
+    "ts": {
+      "type": [
+        "integer",
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "sensor": {
+      "type": "string",
+      "enum": [
+        "temperature",
+        "humidity",
+        "ultrasonic"
+      ]
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "°C",
+        "C",
+        "%",
+        "cm"
+      ]
+    }
+  },
+  "required": [
+    "v",
+    "ts",
+    "sensor",
+    "value",
+    "unit"
+  ],
+  "additionalProperties": true
+}

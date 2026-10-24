@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "REST API Error Response",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "required": [
+    "status",
+    "error",
+    "message",
+    "timestamp"
+  ],
+  "additionalProperties": false
+}

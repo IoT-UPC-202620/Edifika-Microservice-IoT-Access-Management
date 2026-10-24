@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccessAttemptResource",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "deviceId": {
+      "type": "integer"
+    },
+    "deviceCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{3,64}$"
+    },
+    "userId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "credentialId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "rfidUidMasked": {
+      "type": "string"
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": [
+        "FREE_ACCESS",
+        "RESERVED"
+      ]
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "GRANTED",
+        "DENIED"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "deviceId",
+    "deviceCode",
+    "userId",
+    "credentialId",
+    "rfidUidMasked",
+    "accessMode",
+    "result",
+    "reason",
+    "occurredAt",
+    "receivedAt"
+  ],
+  "additionalProperties": false
+}

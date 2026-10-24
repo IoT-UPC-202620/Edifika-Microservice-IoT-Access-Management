@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Alert Event Payload",
+  "type": "object",
+  "properties": {
+    "alert": {
+      "type": "string",
+      "enum": [
+        "humidity_low",
+        "water_level_critical",
+        "device_offline",
+        "unregistered_device",
+        "firmware_incompatible",
+        "stale_cache",
+        "lock_unresponsive",
+        "possible_unauthorized_access",
+        "sensor_fault_temperature",
+        "sensor_fault_humidity",
+        "sensor_fault_ultrasonic"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "raised",
+        "cleared"
+      ]
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "sensor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "alert",
+    "state",
+    "deviceId"
+  ],
+  "additionalProperties": true
+}

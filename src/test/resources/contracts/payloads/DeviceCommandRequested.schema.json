@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceCommandRequested Command Payload",
+  "type": "object",
+  "properties": {
+    "commandId": {
+      "type": "string"
+    },
+    "deviceCode": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "params": {
+      "type": "object"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    }
+  },
+  "required": [
+    "commandId",
+    "deviceCode",
+    "type",
+    "params",
+    "expiresAt"
+  ],
+  "additionalProperties": true
+}

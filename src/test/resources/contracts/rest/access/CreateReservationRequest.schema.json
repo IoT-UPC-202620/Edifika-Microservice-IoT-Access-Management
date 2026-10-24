@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateReservationRequest",
+  "type": "object",
+  "properties": {
+    "startsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "holderUserId": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "startsAt",
+    "endsAt"
+  ],
+  "additionalProperties": false
+}
