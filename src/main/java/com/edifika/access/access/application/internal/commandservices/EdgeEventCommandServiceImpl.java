@@ -131,9 +131,9 @@ public class EdgeEventCommandServiceImpl implements EdgeEventCommandService {
 
         String status = command.status() != null ? command.status().toLowerCase() : "";
         switch (status) {
-            case "online" -> device.markOnline(command.occurredAt());
+            case "online", "active" -> device.markOnline(command.occurredAt());
             case "offline" -> device.markOffline(command.occurredAt());
-            case "maintenance_started" -> device.startMaintenance();
+            case "maintenance_started", "maintenance" -> device.startMaintenance();
             case "maintenance_ended" -> device.endMaintenance(command.occurredAt(), Duration.ofMinutes(5));
             default -> log.debug("Estado de dispositivo no transicional reportado: {}", status);
         }
@@ -196,14 +196,15 @@ public class EdgeEventCommandServiceImpl implements EdgeEventCommandService {
 
         String norm = rawReason.trim().toLowerCase();
         return switch (norm) {
+            case "ok", "granted" -> AccessReason.GRANTED;
             case "not_registered", "unknown_credential" -> AccessReason.NOT_REGISTERED;
             case "suspended", "credential_suspended" -> AccessReason.SUSPENDED;
             case "delinquent" -> AccessReason.DELINQUENT;
             case "revoked", "credential_revoked" -> AccessReason.REVOKED;
             case "expired", "credential_expired" -> AccessReason.EXPIRED;
-            case "not_authorized", "reservation_required" -> AccessReason.NOT_AUTHORIZED;
+            case "not_authorized", "reservation_required", "no_permission" -> AccessReason.NOT_AUTHORIZED;
             case "maintenance", "device_maintenance" -> AccessReason.MAINTENANCE;
-            case "out_of_schedule", "schedule_outside" -> AccessReason.OUT_OF_SCHEDULE;
+            case "out_of_schedule", "outside_schedule", "schedule_outside" -> AccessReason.OUT_OF_SCHEDULE;
             default -> AccessReason.UNSUPPORTED;
         };
     }
