@@ -17,6 +17,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class AuditableAbstractAggregateRoot<T extends AbstractAggregateRoot<T>> extends AbstractAggregateRoot<T> {
+
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +26,17 @@ public class AuditableAbstractAggregateRoot<T extends AbstractAggregateRoot<T>> 
     @Getter
     @Column(nullable = false, updatable = false)
     @CreatedDate
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @Getter
     @LastModifiedDate
     @Column(nullable = false)
-    private Date updatedAt;
+    private Date updatedAt = new Date();
+
+    public void setAuditDates(Date createdAt, Date updatedAt) {
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public void addDomainEvent(Object event) {
         super.registerEvent(event);

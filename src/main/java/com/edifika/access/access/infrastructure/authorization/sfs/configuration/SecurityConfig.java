@@ -1,5 +1,6 @@
 package com.edifika.access.access.infrastructure.authorization.sfs.configuration;
 
+import com.edifika.access.access.infrastructure.authorization.sfs.EdgeGatewayAuthenticationFilter;
 import com.edifika.access.access.infrastructure.authorization.sfs.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,9 +40,12 @@ public class SecurityConfig {
     };
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final EdgeGatewayAuthenticationFilter edgeGatewayAuthenticationFilter;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
+                          EdgeGatewayAuthenticationFilter edgeGatewayAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.edgeGatewayAuthenticationFilter = edgeGatewayAuthenticationFilter;
     }
 
     @Bean
@@ -55,6 +59,7 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(edgeGatewayAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
