@@ -132,7 +132,10 @@ public class AccessCredential extends AuditableAbstractAggregateRoot<AccessCrede
     }
 
     public String residentRef() {
-        return this.userId != null ? this.userId.toString() : this.edgeResidentRef;
+        if (this.userId != null) {
+            return this.userId.toString();
+        }
+        return this.edgeResidentRef != null ? this.edgeResidentRef : "";
     }
 
     public boolean isSuspendedForDebt() {
