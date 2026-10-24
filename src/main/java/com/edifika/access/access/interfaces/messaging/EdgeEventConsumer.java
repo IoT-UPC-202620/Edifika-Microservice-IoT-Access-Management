@@ -42,10 +42,10 @@ public class EdgeEventConsumer {
 
         try {
             switch (eventType) {
-                case "PhysicalAccessAttempt", "AccessAttemptRecorded" -> {
+                case "AccessAttempt", "PhysicalAccessAttempt", "AccessAttemptRecorded" -> {
                     String attemptId = str(payload.get("attemptId"), envelope.eventId());
-                    String deviceCode = str(payload.get("deviceCode"), null);
-                    String rfidUid = str(payload.get("rfidUid"), str(payload.get("uid"), null));
+                    String deviceCode = str(payload.get("deviceCode"), str(payload.get("deviceId"), null));
+                    String rfidUid = str(payload.get("rfidUid"), str(payload.get("credential"), str(payload.get("uid"), null)));
                     String residentId = str(payload.get("residentId"), null);
                     String result = str(payload.get("result"), "DENIED");
                     String reason = str(payload.get("reason"), null);
@@ -62,10 +62,10 @@ public class EdgeEventConsumer {
                             envelope.eventId()
                     ));
                 }
-                case "DeviceStatusReported", "DeviceHeartbeatReported" -> {
-                    String deviceCode = str(payload.get("deviceCode"), null);
-                    String status = str(payload.get("status"), null);
-                    String firmwareVersion = str(payload.get("firmwareVersion"), null);
+                case "DeviceStatus", "DeviceStatusReported", "DeviceHeartbeatReported" -> {
+                    String deviceCode = str(payload.get("deviceCode"), str(payload.get("deviceId"), null));
+                    String status = str(payload.get("status"), str(payload.get("event"), null));
+                    String firmwareVersion = str(payload.get("firmwareVersion"), str(payload.get("firmware"), null));
 
                     edgeEventCommandService.applyDeviceStatus(new ApplyDeviceStatusCommand(
                             envelope.gatewayCode(),
@@ -77,7 +77,7 @@ public class EdgeEventConsumer {
                     ));
                 }
                 case "CredentialChanged" -> {
-                    String uid = str(payload.get("uid"), str(payload.get("rfidUid"), null));
+                    String uid = str(payload.get("uid"), str(payload.get("rfidUid"), str(payload.get("credential"), null)));
                     String residentRef = str(payload.get("residentRef"), str(payload.get("residentId"), null));
                     String status = str(payload.get("status"), "ACTIVE");
                     Long buildingId = envelope.buildingId();
@@ -90,7 +90,7 @@ public class EdgeEventConsumer {
                             buildingId
                     ));
                 }
-                case "DeviceCommandResultReported" -> {
+                case "CommandResult", "DeviceCommandResultReported" -> {
                     String commandId = str(payload.get("commandId"), null);
                     String status = str(payload.get("status"), null);
                     String detail = str(payload.get("detail"), null);
