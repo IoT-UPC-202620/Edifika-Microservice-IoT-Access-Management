@@ -1,0 +1,100 @@
+# TASKS — Plan 2: IoT Access Management (H2)
+
+## Task 1 — Esqueleto del servicio desde la plantilla Payment   [x] hecha
+- Rama: feature/H2-scaffold
+- Paso actual: Completado
+- Archivos tocados: pom.xml, Dockerfile, .env.example, .gitignore, README.md, application.properties, EdifikaMicroserviceIoTAccessManagementApplication.java, shared/**, infrastructure/authorization/sfs/**, GlobalExceptionHandler.java, ErrorResource.java, IotDeviceController.java, ExternalServiceUnavailableException.java, TestcontainersConfiguration.java, JwtTestTokens.java, ContractAssertions.java, ApplicationContextIT.java
+- Tests: `mvnw.cmd -B verify` → 2/2 tests OK (ApplicationContextIT)
+- Último commit: pendiente
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 2 — Infraestructura de mensajería (topología, sobre, publicadores e idempotencia)   [ ] pendiente
+- Rama: feature/H2-messaging
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 3 — Gateways y dispositivos   [ ] pendiente
+- Rama: feature/H2-devices
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 4 — Credenciales RFID   [ ] pendiente
+- Rama: feature/H2-credentials
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 5 — Sync del edge y notificación de cambios   [ ] pendiente
+- Rama: feature/H2-edge-sync
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 6 — Estado del residente y verificación de deudas (ACL hacia Residential y Payment)   [ ] pendiente
+- Rama: feature/H2-debt-check
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 7 — Reservas de puerta, autorizados y rol   [ ] pendiente
+- Rama: feature/H2-door-reservations
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 8 — Consumidor de eventos del edge   [ ] pendiente
+- Rama: feature/H2-edge-events
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 9 — Comandos al nodo (LED RGB)   [ ] pendiente
+- Rama: feature/H2-device-control
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 10 — Vistas del residente y auditoría   [ ] pendiente
+- Rama: feature/H2-resident-views
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
+
+## Task 11 — Cierre de H2   [ ] pendiente
+- Rama: feature/H2-docs
+- Paso actual: pendiente
+- Archivos tocados: —
+- Tests: —
+- Último commit: —
+- Métricas: —
+- Bloqueos / notas: —
