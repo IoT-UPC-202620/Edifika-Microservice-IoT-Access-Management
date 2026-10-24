@@ -104,7 +104,7 @@ public class DeviceControlCommandServiceImpl implements DeviceControlCommandServ
                 Map.of(
                         "commandId", commandId,
                         "deviceCode", deviceCode,
-                        "type", "SET_LED",
+                        "type", "rgb",
                         "params", Map.of("color", rgb.value()),
                         "expiresAt", expiresAt.toString()
                 )
