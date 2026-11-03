@@ -22,11 +22,11 @@ public interface AccessAttemptRepository extends JpaRepository<AccessAttempt, Lo
     List<AccessAttempt> findAllByUserIdOrderByOccurredAtDesc(Long userId, Pageable pageable);
 
     @Query("SELECT a FROM AccessAttempt a WHERE " +
-            "(:deviceId IS NULL OR a.deviceId = :deviceId) AND " +
-            "(:userId IS NULL OR a.userId = :userId) AND " +
-            "(:result IS NULL OR a.result = :result) AND " +
-            "(:from IS NULL OR a.occurredAt >= :from) AND " +
-            "(:to IS NULL OR a.occurredAt <= :to) " +
+            "(cast(:deviceId as long) IS NULL OR a.deviceId = :deviceId) AND " +
+            "(cast(:userId as long) IS NULL OR a.userId = :userId) AND " +
+            "(cast(:result as string) IS NULL OR a.result = :result) AND " +
+            "(cast(:from as java.time.Instant) IS NULL OR a.occurredAt >= :from) AND " +
+            "(cast(:to as java.time.Instant) IS NULL OR a.occurredAt <= :to) " +
             "ORDER BY a.occurredAt DESC")
     List<AccessAttempt> search(
             @Param("deviceId") Long deviceId,
