@@ -41,21 +41,40 @@ public class CredentialCommandServiceImpl implements CredentialCommandService {
     @Override
     public Optional<AccessCredential> createCredential(CreateCredentialCommand command) {
         String normalizedUid = new RfidUid(command.rfidUid()).value();
-        if (credentialRepository.existsByRfidUid(normalizedUid)) {
-            throw new DuplicateRfidUidException(normalizedUid);
-        }
+        Optional<AccessCredential> existing = credentialRepository.findByRfidUid(normalizedUid);
 
-        AccessCredential credential = AccessCredential.createCloud(
-                normalizedUid,
-                command.buildingId(),
-                command.userId(),
-                command.holderName(),
-                command.validFrom(),
-                command.validUntil()
-        );
+        AccessCredential credential;
+        Long previousBuildingId = null;
+        if (existing.isPresent()) {
+            // Una tarjeta revocada o perdida se puede volver a entregar; una vigente no.
+            credential = existing.get();
+            if (!credential.isRetired()) {
+                throw new DuplicateRfidUidException(normalizedUid);
+            }
+            previousBuildingId = credential.getBuildingId();
+            credential.reassign(
+                    command.buildingId(),
+                    command.userId(),
+                    command.holderName(),
+                    command.validFrom(),
+                    command.validUntil()
+            );
+        } else {
+            credential = AccessCredential.createCloud(
+                    normalizedUid,
+                    command.buildingId(),
+                    command.userId(),
+                    command.holderName(),
+                    command.validFrom(),
+                    command.validUntil()
+            );
+        }
 
         AccessCredential saved = credentialRepository.save(credential);
         edgeSyncNotifier.changedForBuilding(command.buildingId());
+        if (previousBuildingId != null && !previousBuildingId.equals(command.buildingId())) {
+            edgeSyncNotifier.changedForBuilding(previousBuildingId);
+        }
 
         eventPublisher.publishEvent(new CredentialCreatedEvent(
                 command.userId(),

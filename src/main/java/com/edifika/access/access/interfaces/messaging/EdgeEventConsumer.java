@@ -8,6 +8,7 @@ import com.edifika.access.access.domain.services.CredentialCommandService;
 import com.edifika.access.access.domain.services.EdgeEventCommandService;
 import com.edifika.access.shared.infrastructure.messaging.IntegrationEnvelope;
 import lombok.extern.slf4j.Slf4j;
+import com.edifika.access.access.application.internal.commandservices.CardEnrollmentService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +21,15 @@ public class EdgeEventConsumer {
 
     private final EdgeEventCommandService edgeEventCommandService;
     private final CredentialCommandService credentialCommandService;
+    private final CardEnrollmentService cardEnrollmentService;
 
     public EdgeEventConsumer(
             EdgeEventCommandService edgeEventCommandService,
-            CredentialCommandService credentialCommandService) {
+            CredentialCommandService credentialCommandService,
+            CardEnrollmentService cardEnrollmentService) {
         this.edgeEventCommandService = edgeEventCommandService;
         this.credentialCommandService = credentialCommandService;
+        this.cardEnrollmentService = cardEnrollmentService;
     }
 
     @RabbitListener(queues = "access.edge-events")
@@ -103,6 +107,11 @@ public class EdgeEventConsumer {
                             occurredAt,
                             envelope.eventId()
                     ));
+                }
+                case "CardEnrolled" -> {
+                    String deviceCode = str(payload.get("deviceCode"), str(payload.get("deviceId"), null));
+                    String uid = str(payload.get("uid"), str(payload.get("credential"), null));
+                    cardEnrollmentService.onCardCaptured(deviceCode, uid, occurredAt);
                 }
                 default -> log.warn("Tipo de evento no reconocido en edge consumer: {}", eventType);
             }
