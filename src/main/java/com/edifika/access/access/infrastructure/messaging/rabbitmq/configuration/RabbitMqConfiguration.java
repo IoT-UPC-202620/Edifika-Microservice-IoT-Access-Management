@@ -81,6 +81,8 @@ public class RabbitMqConfiguration {
         Binding b4 = BindingBuilder.bind(accessEdgeEventsQueue).to(eventsExchange).with("edge.command-result");
         // Tarjeta leída por un lector en modo registro.
         Binding b5 = BindingBuilder.bind(accessEdgeEventsQueue).to(eventsExchange).with("edge.card-enrolled");
+        // Nodo que un gateway identificó sin estar registrado.
+        Binding b6 = BindingBuilder.bind(accessEdgeEventsQueue).to(eventsExchange).with("edge.device-discovered");
 
         Binding bDlq = BindingBuilder.bind(accessEdgeEventsDlq).to(dlxExchange).with(ACCESS_EDGE_EVENTS_QUEUE);
 
@@ -90,7 +92,7 @@ public class RabbitMqConfiguration {
                 dlxExchange,
                 accessEdgeEventsQueue,
                 accessEdgeEventsDlq,
-                b1, b2, b3, b4, b5,
+                b1, b2, b3, b4, b5, b6,
                 bDlq
         ));
     }
