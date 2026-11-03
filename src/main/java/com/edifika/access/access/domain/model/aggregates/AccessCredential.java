@@ -91,6 +91,30 @@ public class AccessCredential extends AuditableAbstractAggregateRoot<AccessCrede
         return credential;
     }
 
+    /** Tarjeta dada de baja (revocada o perdida): puede volver a entregarse a otro titular. */
+    public boolean isRetired() {
+        return status == CredentialStatus.REVOKED || status == CredentialStatus.LOST;
+    }
+
+    /**
+     * Entrega de nuevo una tarjeta dada de baja. El UID es único, así que la
+     * misma fila pasa al nuevo titular y vuelve a quedar activa.
+     */
+    public void reassign(Long buildingId, Long userId, String holderName, Instant validFrom, Instant validUntil) {
+        if (!isRetired()) {
+            throw new IllegalStateException("Solo se puede reasignar una tarjeta revocada o perdida");
+        }
+        this.buildingId = buildingId;
+        this.userId = userId;
+        this.holderName = holderName;
+        this.status = CredentialStatus.ACTIVE;
+        this.suspensionReason = null;
+        this.origin = CredentialOrigin.CLOUD;
+        this.edgeResidentRef = null;
+        this.validFrom = validFrom;
+        this.validUntil = validUntil;
+    }
+
     public void suspendForDebt() {
         if (this.status == CredentialStatus.ACTIVE) {
             this.status = CredentialStatus.SUSPENDED;
