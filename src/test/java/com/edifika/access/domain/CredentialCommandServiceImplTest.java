@@ -50,7 +50,7 @@ class CredentialCommandServiceImplTest {
         CreateCredentialCommand cmd = new CreateCredentialCommand(
                 "04A1B2C3", 12L, 15L, "Ana Perez", null, null
         );
-        when(credentialRepository.existsByRfidUid("04A1B2C3")).thenReturn(false);
+        when(credentialRepository.findByRfidUid("04A1B2C3")).thenReturn(Optional.empty());
         when(credentialRepository.save(any(AccessCredential.class))).thenAnswer(i -> i.getArgument(0));
 
         var opt = service.createCredential(cmd);
@@ -65,10 +65,57 @@ class CredentialCommandServiceImplTest {
         CreateCredentialCommand cmd = new CreateCredentialCommand(
                 "04A1B2C3", 12L, 15L, "Ana Perez", null, null
         );
-        when(credentialRepository.existsByRfidUid("04A1B2C3")).thenReturn(true);
+        AccessCredential active = AccessCredential.createCloud("04A1B2C3", 12L, 99L, "Otro", null, null);
+        when(credentialRepository.findByRfidUid("04A1B2C3")).thenReturn(Optional.of(active));
 
         assertThrows(DuplicateRfidUidException.class, () -> service.createCredential(cmd));
         verify(credentialRepository, never()).save(any());
+    }
+
+    @Test
+    void createCredentialRejectsASuspendedCardToo() {
+        AccessCredential suspended = AccessCredential.createCloud("04A1B2C3", 12L, 99L, "Otro", null, null);
+        suspended.changeStatus(CredentialStatus.SUSPENDED, Instant.now());
+        when(credentialRepository.findByRfidUid("04A1B2C3")).thenReturn(Optional.of(suspended));
+
+        assertThrows(DuplicateRfidUidException.class, () -> service.createCredential(
+                new CreateCredentialCommand("04A1B2C3", 12L, 15L, "Ana Perez", null, null)));
+        verify(credentialRepository, never()).save(any());
+    }
+
+    @Test
+    void createCredentialReassignsARevokedCardToTheNewHolder() {
+        AccessCredential revoked = AccessCredential.createCloud("04A1B2C3", 7L, 99L, "Antiguo", null, null);
+        revoked.changeStatus(CredentialStatus.REVOKED, Instant.now());
+        when(credentialRepository.findByRfidUid("04A1B2C3")).thenReturn(Optional.of(revoked));
+        when(credentialRepository.save(any(AccessCredential.class))).thenAnswer(i -> i.getArgument(0));
+
+        var saved = service.createCredential(
+                new CreateCredentialCommand("04 a1 b2 c3", 12L, 15L, "Ana Perez", null, null)).orElseThrow();
+
+        assertSame(revoked, saved);
+        assertEquals(CredentialStatus.ACTIVE, saved.getStatus());
+        assertEquals(15L, saved.getUserId());
+        assertEquals("Ana Perez", saved.getHolderName());
+        assertEquals(12L, saved.getBuildingId());
+        // Los dos edificios se resincronizan: el nuevo la habilita y el anterior la retira
+        verify(edgeSyncNotifier).changedForBuilding(12L);
+        verify(edgeSyncNotifier).changedForBuilding(7L);
+        verify(eventPublisher).publishEvent(any(CredentialCreatedEvent.class));
+    }
+
+    @Test
+    void createCredentialReassignsALostCard() {
+        AccessCredential lost = AccessCredential.createCloud("04A1B2C3", 12L, 99L, "Antiguo", null, null);
+        lost.changeStatus(CredentialStatus.LOST, Instant.now());
+        when(credentialRepository.findByRfidUid("04A1B2C3")).thenReturn(Optional.of(lost));
+        when(credentialRepository.save(any(AccessCredential.class))).thenAnswer(i -> i.getArgument(0));
+
+        var saved = service.createCredential(
+                new CreateCredentialCommand("04A1B2C3", 12L, 15L, "Ana Perez", null, null)).orElseThrow();
+
+        assertEquals(CredentialStatus.ACTIVE, saved.getStatus());
+        verify(edgeSyncNotifier, times(1)).changedForBuilding(12L);
     }
 
     @Test
